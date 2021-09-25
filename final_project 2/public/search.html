@@ -1,0 +1,187 @@
+<form class="form-horizontal" role="form">
+    <div class="row" style="margin-bottom: 10px;">
+        <label class="col-lg-2 control-label">分词关键字</label>
+        <div class="col-lg-3">
+            <input type="text" class="form-control" placeholder="请输入分词关键字" ng-model="$parent.splitword">
+        </div>
+        <br></br>
+        <label class="col-lg-2 control-label">标题</label>
+        <div class="col-lg-3">
+            <input type="text" class="form-control" placeholder="请输入标题关键字" ng-model="$parent.title1">
+        </div>
+        <div class="col-lg-1">
+            <select class="form-control" autocomplete="off" ng-model="$parent.selectTitle">
+                <option selected="selected">AND</option>
+                <option>OR</option>
+
+            </select>
+        </div>
+        <div class="col-lg-3">
+            <input type="text" class="form-control" placeholder="请输入标题关键字" ng-model="$parent.title2">
+        </div>
+    </div>
+
+
+
+    <div class="row" style="margin-bottom: 10px;">
+        <label class="col-lg-2 control-label">内容</label>
+        <div class="col-lg-3">
+            <input type="text" class="form-control" placeholder="请输入内容关键字" ng-model="$parent.content1">
+        </div>
+        <div class="col-lg-1">
+            <select class="form-control" autocomplete="off" ng-model="$parent.selectContent">
+                <option selected="selected">AND</option>
+                <option>OR</option>
+            </select>
+        </div>
+        <div class="col-lg-3">
+            <input type="text" class="form-control" placeholder="请输入内容关键字" ng-model="$parent.content2">
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 10px;">
+        <label class="col-lg-2 control-label">关键词</label>
+        <div class="col-lg-3">
+            <input type="text" class="form-control" placeholder="请输入关键词" ng-model="$parent.keyword1">
+        </div>
+        <div class="col-lg-1">
+            <select class="form-control" autocomplete="on" ng-model="$parent.selectKeyword">
+                <option selected="selected">AND</option>
+                <option>OR</option>
+            </select>
+        </div>
+        <div class="col-lg-3">
+            <input type="text" class="form-control" placeholder="请输入关键词" ng-model="$parent.keyword2">
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 10px;">
+        <label class="col-lg-2 control-label">来源</label>
+        <div class="col-lg-1">
+            <select class="form-control" autocomplete="off" ng-model="$parent.selectSource">
+                <option selected="selected">新浪新闻</option>
+                <option>人民网</option>
+                <option>网易新闻</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-9">
+            <button type="submit" class="btn btn-default" ng-click="search()">查询</button>
+        </div>
+    </div>
+
+</form>
+
+<!--显示查询结果-->
+<div ng-show="isisshowresult">
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>标题</td>
+                <td>作者</td>
+<!--                <td>内容</td>-->
+                <td>关键词</td>
+                <td>链接</td>
+                <td>发布时间</td>
+            </tr>
+
+        </thead>
+        <tbody>
+        <tr ng-repeat="(key, item) in items">
+            <td>{{index+key}}</td>
+            <td>{{item.title}}</td>
+            <td>{{item.author}}</td>
+<!--            <td>{{item.content}}</td>-->
+            <td>{{item.keywords}}</td>
+            <td>{{item.url}}</td>
+            <td>{{item.publish_date}}</td>
+        </tr>
+
+        </tbody>
+    </table>
+
+    <div class="row">
+<!--        <div class="form-group">-->
+        <div class="pull-left" style="margin-top: 12px;">
+            <button type="submit" class="btn btn-primary" ng-click="searchsortASC()" >发布时间升序</button>
+            <button type="submit" class="btn btn-primary" ng-click="searchsortDESC()">发布时间降序</button>
+            <button type="submit" class="btn btn-primary" ng-click="searchscoreDESC()">主题词打分降序</button>
+        </div>
+<!--        </div>-->
+        <div class="pull-right">
+            <nav>
+                <ul class="pagination">
+                    <li>
+                        <a ng-click="Previous()" role="button"><span role="button">上一页</span></a>
+                    </li>
+                    <li ng-repeat="page in pageList" ng-class="{active:isActivePage(page)}" role="button">
+                        <a ng-click="selectPage(page)" >{{ page }}</a>
+                    </li>
+                    <li>
+                        <a ng-click="Next()" role="button"><span role="button">下一页</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- 显示log -->
+<div ng-show="isisshowlog">
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>用户名</td>
+                <td>请求时间</td>
+<!--                <td>内容</td>-->
+                <td>请求方法</td>
+                <td>状态</td>
+                <td>链接</td>
+                <td>远程地址</td>
+            </tr>
+
+        </thead>
+        <tbody>
+        <tr ng-repeat="(key, item) in items">
+            <td>{{index+key}}</td>
+            <td>{{item.username}}</td>
+            <td>{{item.request_time}}</td>
+<!--            <td>{{item.content}}</td>-->
+            <td>{{item.request_method}}</td>
+            <td>{{item.status}}</td>
+            <td>{{item.request_url}}</td>
+            <td>{{item.remote_addr}}</td>
+        </tr>
+
+        </tbody>
+    </table>
+
+    <div class="row">
+<!--        <div class="form-group">-->
+        <!-- <div class="pull-left" style="margin-top: 12px;">
+            <button type="submit" class="btn btn-primary" ng-click="searchsortASC()" >发布时间升序</button>
+            <button type="submit" class="btn btn-primary" ng-click="searchsortDESC()">发布时间降序</button>
+        </div> -->
+<!--        </div>-->
+        <div class="pull-right">
+            <nav>
+                <ul class="pagination">
+                    <li>
+                        <a ng-click="Previous()" role="button"><span role="button">上一页</span></a>
+                    </li>
+                    <li ng-repeat="page in pageList" ng-class="{active:isActivePage(page)}" role="button">
+                        <a ng-click="selectPage(page)" >{{ page }}</a>
+                    </li>
+                    <li>
+                        <a ng-click="Next()" role="button"><span role="button">下一页</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+<!-- <form>
+    <div class="form-group">
+        <div class="col-md-offset-9">
+            <button type="submit" class="btn btn-default" ng-click="searchlog()">查询</button>
+        </div>
+    </div>
+</form> -->
+<div ng-show="isisshowlog">
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>用户名</td>
+                <td>请求时间</td>
+<!--                <td>内容</td>-->
+                <td>请求方法</td>
+                <td>状态</td>
+                <td>链接</td>
+                <td>远程地址</td>
+            </tr>
+
+        </thead>
+        <tbody>
+        <tr ng-repeat="(key, item) in items">
+            <td>{{index+key}}</td>
+            <td>{{item.username}}</td>
+            <td>{{item.request_time}}</td>
+<!--            <td>{{item.content}}</td>-->
+            <td>{{item.request_method}}</td>
+            <td>{{item.status}}</td>
+            <td>{{item.request_url}}</td>
+            <td>{{item.remote_addr}}</td>
+        </tr>
+
+        </tbody>
+    </table>
+
+    <div class="row">
+<!--        <div class="form-group">-->
+        <!-- <div class="pull-left" style="margin-top: 12px;">
+            <button type="submit" class="btn btn-primary" ng-click="searchsortASC()" >发布时间升序</button>
+            <button type="submit" class="btn btn-primary" ng-click="searchsortDESC()">发布时间降序</button>
+        </div> -->
+<!--        </div>-->
+        <div class="pull-right">
+            <nav>
+                <ul class="pagination">
+                    <li>
+                        <a ng-click="Previous()" role="button"><span role="button">上一页</span></a>
+                    </li>
+                    <li ng-repeat="page in pageList" ng-class="{active:isActivePage(page)}" role="button">
+                        <a ng-click="selectPage(page)" >{{ page }}</a>
+                    </li>
+                    <li>
+                        <a ng-click="Next()" role="button"><span role="button">下一页</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
